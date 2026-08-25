@@ -556,7 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const u = document.getElementById('login-username').value.trim();
         const p = document.getElementById('login-password').value;
 
-        if (u === 'admin' && p === 'admin') {
+        if (u === 'NexBoss' && p === 'NexusLib1144') {
           localStorage.setItem('nexus_session', 'admin');
           window.location.href = 'admin.html';
           return;

@@ -17,7 +17,7 @@ Nexus is a fully static, client-side web application built with Vanilla HTML, CS
 Since there's no backend, running this is as easy as it gets:
 1. Clone the repo.
 2. Open `index.html` in your browser, or run a simple local server (like `python3 -m http.server`).
-3. You can log in using `admin` / `admin123` to check out the command dashboard.
+3. You can log in using `NexBoss` / `NexusLib1144` to check out the command dashboard.
 
 ## Tech Stack
 * **HTML5** 
