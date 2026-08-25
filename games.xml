@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  games.xml — Game Tracker Logbook
+  Unit 4 (XML): Structured seed data loaded via XMLHttpRequest (AJAX) on first visit.
+  High-resolution official banner URLs (Steam CDN & Wikipedia Unscaled PNGs).
+-->
+<games>
+
+  <game>
+    <id>xml_seed_001</id>
+    <title>Elden Ring</title>
+    <platform>PC</platform>
+    <genre>RPG</genre>
+    <status>played</status>
+    <rating>5</rating>
+    <year>2022</year>
+    <hours>120</hours>
+    <cover>https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg</cover>
+    <notes>Absolute masterpiece. 120+ hours and still going strong.</notes>
+  </game>
+
+  <game>
+    <id>xml_seed_002</id>
+    <title>Hollow Knight</title>
+    <platform>PC</platform>
+    <genre>Action</genre>
+    <status>played</status>
+    <rating>5</rating>
+    <year>2017</year>
+    <hours>52</hours>
+    <cover>https://cdn.cloudflare.steamstatic.com/steam/apps/367520/header.jpg</cover>
+    <notes>Tight controls and incredible world-building. A masterclass in atmosphere.</notes>
+  </game>
+
+  <game>
+    <id>xml_seed_003</id>
+    <title>Cyberpunk 2077</title>
+    <platform>PlayStation 5</platform>
+    <genre>RPG</genre>
+    <status>backlog</status>
+    <rating>4</rating>
+    <year>2020</year>
+    <hours></hours>
+    <cover>https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg</cover>
+    <notes>Picked it up after the 2.0 patch. Need to finally start it.</notes>
+  </game>
+
+  <game>
+    <id>xml_seed_004</id>
+    <title>Hades II</title>
+    <platform>PC</platform>
+    <genre>Action</genre>
+    <status>backlog</status>
+    <rating></rating>
+    <year>2024</year>
+    <hours></hours>
+    <cover>https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/header.jpg</cover>
+    <notes>In early access. Waiting for the full v1.0 release to dive in.</notes>
+  </game>
+
+  <game>
+    <id>xml_seed_005</id>
+    <title>GTA VI</title>
+    <platform>PlayStation 5</platform>
+    <genre>Action</genre>
+    <status>upcoming</status>
+    <rating></rating>
+    <year>2025</year>
+    <hours></hours>
+    <cover>https://upload.wikimedia.org/wikipedia/en/4/46/Grand_Theft_Auto_VI.png</cover>
+    <notes>Most anticipated game of the decade. Day-one purchase confirmed.</notes>
+  </game>
+
+  <game>
+    <id>xml_seed_006</id>
+    <title>Fable (2025)</title>
+    <platform>Xbox Series X</platform>
+    <genre>RPG</genre>
+    <status>upcoming</status>
+    <rating></rating>
+    <year>2025</year>
+    <hours></hours>
+    <cover>https://upload.wikimedia.org/wikipedia/en/b/b8/Fable_key_art.png</cover>
+    <notes>A full reboot of the beloved Lionhead franchise. Very excited.</notes>
+  </game>
+
+</games>
