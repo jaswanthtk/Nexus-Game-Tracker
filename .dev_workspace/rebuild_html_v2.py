@@ -19,7 +19,7 @@ HEAD_BLOCK = '''<!DOCTYPE html>
   <link rel="shortcut icon" href="favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 '''
 
@@ -121,7 +121,7 @@ FOOTER = '''
 '''
 
 def write_page(filename, title, navbar_html, main_content, script):
-    html = HEAD_BLOCK.format(title=title) + navbar_html + main_content + FOOTER + f'  <script src="js/{script}?v=2"></script>\n</body>\n</html>\n'
+    html = HEAD_BLOCK.format(title=title) + navbar_html + main_content + FOOTER + f'  <script src="js/{script}?v=3"></script>\n</body>\n</html>\n'
     # Write directly to the parent folder since we are executing from .dev_workspace
     filepath = os.path.join(os.path.dirname(__file__), '..', filename)
     with open(filepath, 'w', encoding='utf-8') as f:
@@ -534,28 +534,28 @@ write_page('login.html', 'Nexus — Authentication', client_navbar('login.html')
 
 WELCOME_PAGE = '''
   <main id="main" role="main">
-    <div class="welcome-hero d-flex align-items-center justify-content-center text-center animate-fade-up" style="min-height: 100vh; background: linear-gradient(135deg, rgba(9,9,11,0.85) 0%, rgba(9,9,11,1) 100%), url('img/bg_cyber.jpg') center/cover;">
-      <div class="container-xl z-2">
-        <h1 class="detail-title text-white mb-3" style="font-size: 5rem; letter-spacing: -0.05em; text-shadow: 0 0 30px rgba(0, 229, 255, 0.4);">N E X U S</h1>
-        <p class="text-muted fs-4 mb-5 max-w-2xl mx-auto" style="font-weight: 500;">The ultimate terminal for tracking your gaming legacy. Sync across platforms, analyze your playtime, and organize your backlog.</p>
+    <div class="welcome-hero d-flex align-items-center justify-content-center text-center animate-fade-up" style="min-height: 100vh; background: linear-gradient(135deg, rgba(9,9,11,0.85) 0%, rgba(9,9,11,0.95) 100%), url('img/bg_cyber.jpg') center/cover;">
+      <div class="container-xl z-2 px-3">
+        <h1 class="detail-title text-white mb-3" style="font-size: 5rem; letter-spacing: -0.05em; text-shadow: 0 0 35px rgba(0, 229, 255, 0.6);">N E X U S</h1>
+        <p class="fs-4 mb-5 max-w-2xl mx-auto" style="color: #e4e4e7; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">The ultimate terminal for tracking your gaming legacy. Sync across platforms, analyze your playtime, and organize your backlog.</p>
         
-        <button class="btn btn-nexus btn-lg px-5 py-3 fs-5" data-bs-toggle="modal" data-bs-target="#welcomeModal">GET STARTED</button>
+        <button class="btn btn-nexus btn-lg px-5 py-3 fs-5" data-bs-toggle="modal" data-bs-target="#welcomeModal"><i class="bi bi-rocket-takeoff-fill me-2"></i>GET STARTED</button>
       </div>
     </div>
 
     <!-- Welcome Modal -->
     <div class="modal fade glass-modal" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0" style="background: var(--bg-surface);">
+        <div class="modal-content border-0">
           <div class="modal-header border-0 pb-0">
             <h2 class="modal-title detail-title fs-3 text-cyan" id="welcomeModalLabel">Initialize Uplink</h2>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center py-5">
-            <p class="text-muted mb-4 fs-5">Would you like to register your identity or proceed as a guest?</p>
-            <div class="d-flex flex-column gap-3 max-w-sm mx-auto" style="max-width: 300px;">
-              <a href="login.html" class="btn btn-nexus w-100 text-white"><i class="bi bi-person-plus-fill me-2"></i>Create Account / Login</a>
-              <a href="catalog.html" class="btn btn-outline-light w-100"><i class="bi bi-box-arrow-in-right me-2"></i>Skip for Now</a>
+            <p class="mb-4 fs-5" style="color: #e4e4e7;">Would you like to register your identity or proceed as a guest?</p>
+            <div class="d-flex flex-column gap-3 max-w-sm mx-auto" style="max-width: 320px;">
+              <a href="login.html" class="btn btn-nexus w-100 py-2"><i class="bi bi-person-plus-fill me-2"></i>Create Account / Login</a>
+              <a href="catalog.html" class="btn btn-outline-light w-100 py-2"><i class="bi bi-box-arrow-in-right me-2"></i>Skip for Now</a>
             </div>
           </div>
         </div>
