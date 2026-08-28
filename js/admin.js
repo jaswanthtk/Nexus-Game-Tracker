@@ -24,18 +24,34 @@ let pendingDeleteId = null;
 const initTheme = () => {
   const currentTheme = localStorage.getItem('nexus_theme') || 'dark';
   document.documentElement.setAttribute('data-theme', currentTheme);
+  if (currentTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
   
   const toggleBtn = document.getElementById('theme-toggle');
   if (toggleBtn) {
-    const icon = toggleBtn.querySelector('i');
-    icon.className = currentTheme === 'light' ? 'bi bi-sun-fill text-amber' : 'bi bi-moon-stars-fill text-cyan';
+    const updateIcon = (theme) => {
+      const iconEl = toggleBtn.querySelector('[data-lucide]');
+      if (iconEl) {
+        iconEl.setAttribute('data-lucide', theme === 'light' ? 'sun' : 'moon');
+        if (window.lucide) lucide.createIcons({ nodes: [iconEl] });
+      }
+    };
+    updateIcon(currentTheme);
     
     toggleBtn.addEventListener('click', () => {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       const newTheme = isDark ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', newTheme);
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
       localStorage.setItem('nexus_theme', newTheme);
-      icon.className = newTheme === 'light' ? 'bi bi-sun-fill text-amber' : 'bi bi-moon-stars-fill text-cyan';
+      updateIcon(newTheme);
     });
   }
 };
@@ -55,10 +71,16 @@ const escapeHtml = (str) => String(str || '')
 const showToast = (message, isError = false) => {
   const toastEl = document.getElementById('app-toast');
   if (!toastEl) return;
-  document.getElementById('toast-text').textContent = message;
-  document.getElementById('toast-icon').className = isError
-    ? 'bi bi-exclamation-triangle-fill me-2 text-danger'
-    : 'bi bi-check-circle-fill me-2 text-neon-green';
+  const textEl = document.getElementById('toast-text');
+  const iconEl = document.getElementById('toast-icon');
+  if (textEl) textEl.textContent = message;
+  if (iconEl) {
+    iconEl.setAttribute('data-lucide', isError ? 'alert-triangle' : 'check-circle');
+    iconEl.className = isError
+      ? 'w-5 h-5 mr-3 text-red-400'
+      : 'w-5 h-5 mr-3 text-brand-400';
+    if (window.lucide) lucide.createIcons({ nodes: [iconEl] });
+  }
   bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 3000 }).show();
 };
 

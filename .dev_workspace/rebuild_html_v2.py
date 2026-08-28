@@ -539,6 +539,7 @@ LOGIN_PAGE = '''
 write_page('login.html', 'Nexus — Authentication', client_navbar('login.html'), LOGIN_PAGE, 'app.js')
 
 WELCOME_PAGE = '''
+<body class="bg-zinc-950 text-zinc-300 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500/30">
   <main id="main" role="main" class="flex flex-col min-h-screen">
     <div class="flex-grow flex items-center justify-center relative overflow-hidden">
       <!-- Background Graphic -->
