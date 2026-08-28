@@ -59,7 +59,7 @@ def client_navbar(active):
     ]
     items = ''
     for href, label in links:
-        cls = 'nav-link active font-medium text-brand-400' if href == active else 'nav-link font-medium text-zinc-400 hover:text-white transition-colors'
+        cls = 'nav-link active font-medium !text-brand-400' if href == active else 'nav-link font-medium !text-zinc-400 hover:!text-white transition-colors'
         aria = ' aria-current="page"' if href == active else ''
         items += f'          <li class="nav-item"><a class="{cls}"{aria} href="{href}">{label}</a></li>\n'
     return f'''<body class="bg-zinc-950 text-zinc-300 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500/30">
@@ -99,7 +99,7 @@ def admin_navbar(active):
     ]
     items = ''
     for href, label in links:
-        cls = 'nav-link active font-medium text-accent-400' if href == active else 'nav-link font-medium text-zinc-400 hover:text-white transition-colors'
+        cls = 'nav-link active font-medium !text-accent-400' if href == active else 'nav-link font-medium !text-zinc-400 hover:!text-white transition-colors'
         aria = ' aria-current="page"' if href == active else ''
         items += f'          <li class="nav-item"><a class="{cls}"{aria} href="{href}">{label}</a></li>\n'
     return f'''<body class="bg-zinc-950 text-zinc-300 min-h-screen flex flex-col font-sans antialiased selection:bg-accent-500/30">

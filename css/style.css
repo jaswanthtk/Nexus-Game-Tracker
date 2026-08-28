@@ -104,7 +104,7 @@ h1, h2, h3, h4, h5, h6, .detail-title, .rajdhani-font {
 /* ============================================================
    GLOBAL NAVBAR
    ============================================================ */
-.nexus-navbar {
+.navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -115,7 +115,7 @@ h1, h2, h3, h4, h5, h6, .detail-title, .rajdhani-font {
   padding: 0.75rem 0;
 }
 
-.nexus-navbar .navbar-brand {
+.navbar .navbar-brand {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 1.4rem;
@@ -126,11 +126,11 @@ h1, h2, h3, h4, h5, h6, .detail-title, .rajdhani-font {
   gap: 0.5rem;
 }
 
-.nexus-navbar .navbar-brand i {
+.navbar .navbar-brand i {
   color: var(--accent-cyan);
 }
 
-.nexus-navbar .nav-link {
+.navbar .nav-link {
   color: var(--text-muted) !important;
   font-weight: 500;
   font-size: 0.9rem;
@@ -139,12 +139,12 @@ h1, h2, h3, h4, h5, h6, .detail-title, .rajdhani-font {
   border-radius: var(--radius-md);
 }
 
-.nexus-navbar .nav-link:hover {
+.navbar .nav-link:hover {
   color: var(--text-primary) !important;
   background: rgba(255, 255, 255, 0.05);
 }
 
-.nexus-navbar .nav-link.active {
+.navbar .nav-link.active {
   color: var(--accent-cyan) !important;
   background: rgba(0, 229, 255, 0.08);
   font-weight: 600;
