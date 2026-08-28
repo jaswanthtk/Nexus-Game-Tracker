@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,34 +10,61 @@
   <!-- SEO & Performance Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="shortcut icon" href="favicon.svg" />
+  <!-- Keep bootstrap for modal functionality -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=3" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: { 400: '#22d3ee', 500: '#06b6d4', 900: '#164e63' },
+            accent: { 400: '#c084fc', 500: '#a855f7' }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Motion (Vanilla) & Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+
+  <link rel="stylesheet" href="css/style.css?v=4" />
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg nexus-navbar animate-fade-up">
-    <div class="container-xl">
-      <a class="navbar-brand" href="catalog.html" aria-label="Nexus Home"><i class="bi bi-hexagon-fill"></i> Nexus</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#clientNav" aria-controls="clientNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-list text-white"></i>
+<body class="bg-zinc-950 text-zinc-300 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500/30">
+  <nav class="navbar navbar-expand-lg sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 shadow-lg py-3">
+    <div class="container-xl flex items-center justify-between">
+      <a class="navbar-brand text-2xl font-display font-bold text-white flex items-center gap-2 hover:text-brand-400 transition-colors" href="catalog.html" aria-label="Nexus Home">
+        <i data-lucide="hexagon" class="text-brand-500 w-8 h-8 fill-brand-500/20"></i> Nexus
+      </a>
+      <button class="navbar-toggler border-0 shadow-none focus:ring-0 lg:hidden p-1" type="button" data-bs-toggle="collapse" data-bs-target="#clientNav" aria-controls="clientNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i data-lucide="menu" class="w-7 h-7 text-zinc-300"></i>
       </button>
       <div class="collapse navbar-collapse" id="clientNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
-          <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
-          <li class="nav-item"><a class="nav-link" href="client_search.html">Game Search</a></li>
-          <li class="nav-item"><a class="nav-link" href="client_profile.html">User Profile</a></li>
-          <li class="nav-item"><a class="nav-link" href="client_logbook.html">Library</a></li>
-          <li class="nav-item"><a class="nav-link active" aria-current="page" href="client_contact.html">Contact/Support</a></li>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
+          <li class="nav-item"><a class="nav-link font-medium text-zinc-400 hover:text-white transition-colors" href="catalog.html">Catalog</a></li>
+          <li class="nav-item"><a class="nav-link font-medium text-zinc-400 hover:text-white transition-colors" href="client_search.html">Game Search</a></li>
+          <li class="nav-item"><a class="nav-link font-medium text-zinc-400 hover:text-white transition-colors" href="client_profile.html">User Profile</a></li>
+          <li class="nav-item"><a class="nav-link font-medium text-zinc-400 hover:text-white transition-colors" href="client_logbook.html">Library</a></li>
+          <li class="nav-item"><a class="nav-link active font-medium text-brand-400" aria-current="page" href="client_contact.html">Contact/Support</a></li>
         </ul>
-        <ul class="navbar-nav align-items-center gap-3">
-          <li class="nav-item"><a class="nav-link text-cyan" id="nav-login-btn" href="login.html"><i class="bi bi-person-circle me-1"></i><span id="nav-login-text">Login</span></a></li>
+        <ul class="navbar-nav align-items-center gap-4">
+          <li class="nav-item"><a class="nav-link flex items-center gap-2 text-brand-400 hover:text-brand-300 font-medium transition-colors" id="nav-login-btn" href="login.html"><i data-lucide="circle-user" class="w-5 h-5"></i><span id="nav-login-text">Login</span></a></li>
           <li class="nav-item">
-            <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Light/Dark Theme">
-              <i class="bi bi-moon-stars-fill"></i>
+            <button class="p-2 rounded-full bg-zinc-900/50 hover:bg-zinc-800 text-zinc-400 hover:text-brand-400 transition-colors border border-zinc-800/50" id="theme-toggle" aria-label="Toggle Light/Dark Theme">
+              <i data-lucide="moon" class="w-5 h-5" id="theme-icon"></i>
             </button>
           </li>
         </ul>
@@ -45,58 +72,72 @@
     </div>
   </nav>
 
-  <main class="py-5" id="main" role="main">
+  <main class="py-12 flex-grow" id="main" role="main">
     <div class="container-xl">
-      <h1 class="detail-title text-cyan mb-4 text-center animate-fade-up">Establish Uplink</h1>
-      <section class="row justify-content-center animate-fade-up delay-100" aria-label="Contact Form">
-        <div class="col-lg-8">
-          <div class="bento-card">
-            <form id="contact-form" novalidate>
-              <div class="mb-4">
-                <label for="contact-name" class="form-label">Operative ID <span class="text-danger" aria-hidden="true">*</span></label>
-                <input type="text" id="contact-name" name="name" class="form-control" required minlength="2" placeholder="Your name">
-                <div class="invalid-feedback">Please enter your name.</div>
-              </div>
-              <div class="mb-4">
-                <label for="contact-email" class="form-label">Comms Channel (Email) <span class="text-danger" aria-hidden="true">*</span></label>
-                <input type="email" id="contact-email" name="email" class="form-control" required placeholder="you@example.com">
-                <div class="invalid-feedback">Please enter a valid email.</div>
-              </div>
-              <div class="mb-4">
-                <label for="contact-message" class="form-label">Transmission <span class="text-danger" aria-hidden="true">*</span></label>
-                <textarea id="contact-message" name="message" class="form-control" rows="5" required minlength="10" placeholder="Message content..."></textarea>
-                <div class="invalid-feedback">Please enter your message.</div>
-              </div>
-              <button type="button" class="btn btn-save w-100" id="btn-submit-contact"><i class="bi bi-send-fill me-2"></i>Transmit</button>
-            </form>
-            <div id="contact-success" class="alert mt-4 d-none" style="background:var(--border-subtle); border:1px solid var(--lane-played); color:var(--lane-played);">
-              <i class="bi bi-check-circle-fill me-2"></i>Transmission successful.
+      <div class="max-w-2xl mx-auto">
+        <h1 class="text-4xl font-display font-bold text-brand-400 mb-2 text-center">Establish Uplink</h1>
+        <p class="text-zinc-400 text-center mb-10">Transmit feedback or support requests securely to Nexus Command.</p>
+        
+        <section class="bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-8 shadow-xl">
+          <form id="contact-form" novalidate class="space-y-6">
+            <div>
+              <label for="contact-name" class="block text-sm font-medium text-zinc-300 mb-2">Operative ID <span class="text-brand-500">*</span></label>
+              <input type="text" id="contact-name" name="name" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all" required minlength="2" placeholder="Your designated callsign">
+              <div class="invalid-feedback mt-1 text-sm text-red-400 hidden">Please enter your ID.</div>
             </div>
+            
+            <div>
+              <label for="contact-email" class="block text-sm font-medium text-zinc-300 mb-2">Comms Channel (Email) <span class="text-brand-500">*</span></label>
+              <input type="email" id="contact-email" name="email" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all" required placeholder="operative@nexus.local">
+              <div class="invalid-feedback mt-1 text-sm text-red-400 hidden">Please enter a valid frequency.</div>
+            </div>
+            
+            <div>
+              <label for="contact-message" class="block text-sm font-medium text-zinc-300 mb-2">Transmission Data <span class="text-brand-500">*</span></label>
+              <textarea id="contact-message" name="message" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all min-h-[150px]" required minlength="10" placeholder="Enter message payload..."></textarea>
+              <div class="invalid-feedback mt-1 text-sm text-red-400 hidden">Transmission cannot be empty.</div>
+            </div>
+            
+            <button type="button" class="w-full bg-brand-500 hover:bg-brand-400 text-zinc-950 font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-lg shadow-brand-500/20" id="btn-submit-contact">
+              <i data-lucide="send" class="w-5 h-5"></i> Transmit Payload
+            </button>
+          </form>
+          
+          <div id="contact-success" class="mt-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 flex items-center gap-3 d-none">
+            <i data-lucide="check-circle-2" class="w-6 h-6 shrink-0"></i>
+            <span>Transmission successful. Command has received your data.</span>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   </main>
 
-  <footer class="py-4 text-center text-muted animate-fade-up delay-300" style="border-top: 1px solid var(--border-subtle); margin-top: 5rem;">
+  <footer class="mt-auto py-8 text-center text-zinc-500 border-t border-zinc-800/50">
     <div class="container-xl">
-      <p class="mb-0" style="font-family: 'Space Grotesk', sans-serif;"><strong>NEXUS</strong> &mdash; B.Tech Final Project &bull; Vanilla Architecture</p>
+      <p class="mb-0 font-display font-medium tracking-wide"><strong>NEXUS</strong> &mdash; V3 Premium UI &bull; Agentic Build</p>
     </div>
   </footer>
 
-  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:1100">
-    <div id="app-toast" class="toast glass-toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body">
-          <i class="bi bi-check-circle-fill me-2 text-cyan" id="toast-icon"></i>
+  <!-- Toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-4 z-[1100]">
+    <div id="app-toast" class="toast align-items-center text-white bg-zinc-900/90 backdrop-blur border border-zinc-800 shadow-2xl rounded-xl" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex p-1">
+        <div class="toast-body flex items-center text-sm font-medium">
+          <i data-lucide="check-circle" class="w-5 h-5 mr-3 text-brand-400" id="toast-icon"></i>
           <span id="toast-text">Action completed.</span>
         </div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script src="js/app.js?v=3"></script>
+  <!-- Initialize Lucide Icons -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
+  </script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>

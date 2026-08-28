@@ -107,7 +107,7 @@ const attachTiltEffect = (card) => {
 // ==========================================
 const createKanbanCard = (game, index) => {
   const card = document.createElement('div');
-  card.className = `kanban-card animate-fade-up delay-${Math.min((index + 1) * 100, 600)}`;
+  card.className = `bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden shadow-lg cursor-grab active:cursor-grabbing hover:border-brand-500/50 transition-colors animate-fade-up delay-${Math.min((index + 1) * 100, 600)}`;
   card.setAttribute('data-id', game.id);
   card.setAttribute('draggable', 'true');
 
@@ -124,15 +124,15 @@ const createKanbanCard = (game, index) => {
   attachTiltEffect(card);
 
   const coverHtml = game.cover 
-    ? `<img src="${escapeHtml(game.cover)}" class="kanban-card-img" alt="${escapeHtml(game.title)}" onerror="this.src='https://placehold.co/60x80/111/555?text=NA'">`
-    : `<div class="kanban-card-img d-flex align-items-center justify-content-center bg-dark text-muted" style="font-size:10px;">NA</div>`;
+    ? `<img src="${escapeHtml(game.cover)}" class="w-full h-32 object-cover object-center border-b border-zinc-800" alt="${escapeHtml(game.title)}" onerror="this.src='https://placehold.co/60x80/111/555?text=NA'">`
+    : `<div class="w-full h-32 flex items-center justify-center bg-zinc-950 text-zinc-600 border-b border-zinc-800 text-xs font-mono">NA</div>`;
 
   card.innerHTML = `
     ${coverHtml}
-    <div class="kanban-card-content p-2">
-      <div class="fw-bold text-truncate text-white" title="${escapeHtml(game.title)}" style="font-size:0.9rem;">${escapeHtml(game.title)}</div>
-      <div class="text-muted" style="font-size:0.75rem;">${escapeHtml(game.platform)}</div>
-      <div class="text-cyan mt-1" style="font-size:0.75rem;"><i class="bi bi-star-fill text-amber me-1"></i>${game.rating ? game.rating+'/5' : 'NR'}</div>
+    <div class="p-3 bg-zinc-900/50">
+      <div class="font-display font-bold text-white truncate mb-1" title="${escapeHtml(game.title)}">${escapeHtml(game.title)}</div>
+      <div class="text-zinc-400 text-xs mb-2">${escapeHtml(game.platform)}</div>
+      <div class="flex items-center text-brand-400 text-xs font-medium"><i data-lucide="star" class="w-3 h-3 mr-1 fill-brand-400/20"></i>${game.rating ? game.rating+'/5' : 'NR'}</div>
     </div>
   `;
   return card;
@@ -172,6 +172,7 @@ const renderKanban = () => {
     if (badge) badge.textContent = counts[s];
     if (hint) hint.classList.toggle('d-none', counts[s] > 0);
   });
+  if (window.lucide) lucide.createIcons();
 };
 
 const setupDragDrop = () => {
@@ -249,7 +250,7 @@ const renderApiGamesGrid = (containerId, results) => {
   results.forEach((game, idx) => {
     const delay = Math.min((idx + 1) * 100, 600);
     const card = document.createElement('div');
-    card.className = `store-card animate-fade-up delay-${delay}`;
+    card.className = `bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-2xl overflow-hidden shadow-xl hover:border-brand-500/30 transition-colors animate-fade-up delay-${delay} flex flex-col h-full group`;
     
     attachTiltEffect(card);
 
@@ -263,16 +264,19 @@ const renderApiGamesGrid = (containerId, results) => {
     const safeCover = escapeHtml(coverUrl).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
     card.innerHTML = `
-      <img src="${escapeHtml(coverUrl)}" class="store-card-img" alt="${escapeHtml(game.name)}" loading="lazy" onerror="this.src='https://placehold.co/400x600/111/333?text=No+Cover'">
-      <div class="store-card-body d-flex flex-column h-100">
-        <h3 class="store-card-title detail-title fs-5 mb-1 text-truncate" title="${escapeHtml(game.name)}">${escapeHtml(game.name)}</h3>
-        <div class="text-muted mb-3" style="font-size:0.8rem;">${escapeHtml(platText)} &bull; ${escapeHtml(genreText)}</div>
-        <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
-          <span class="text-amber" style="font-size:0.9rem;"><i class="bi bi-star-fill me-1"></i>${ratingHtml}</span>
-          <span class="text-muted" style="font-size:0.9rem;"><i class="bi bi-calendar3 me-1"></i>${released}</span>
+      <div class="relative w-full pt-[130%] overflow-hidden">
+        <img src="${escapeHtml(coverUrl)}" class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${escapeHtml(game.name)}" loading="lazy" onerror="this.src='https://placehold.co/400x600/111/333?text=No+Cover'">
+        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+      </div>
+      <div class="p-5 flex flex-col flex-grow bg-zinc-950 relative -mt-4 rounded-t-2xl z-10">
+        <h3 class="text-xl font-display font-bold text-white mb-1 truncate" title="${escapeHtml(game.name)}">${escapeHtml(game.name)}</h3>
+        <div class="text-zinc-400 text-sm mb-4 font-medium">${escapeHtml(platText)} &bull; ${escapeHtml(genreText)}</div>
+        <div class="flex justify-between items-center mb-5 mt-auto">
+          <span class="flex items-center text-amber-400 text-sm font-bold bg-amber-500/10 px-2 py-1 rounded border border-amber-500/20"><i data-lucide="star" class="w-4 h-4 mr-1 fill-amber-400/20"></i>${ratingHtml}</span>
+          <span class="text-zinc-500 text-sm font-mono">${released}</span>
         </div>
-        <button class="btn btn-save w-100" onclick="addToLibrary('${safeTitle}', '${safeCover}', ${game.id})">
-          <i class="bi bi-plus-lg me-1"></i> Add to Library
+        <button class="w-full bg-zinc-800 hover:bg-brand-500 text-zinc-300 hover:text-zinc-950 font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2" onclick="addToLibrary('${safeTitle}', '${safeCover}', ${game.id})">
+           <i data-lucide="plus" class="w-5 h-5"></i> Add to Library
         </button>
       </div>
     `;
@@ -281,6 +285,7 @@ const renderApiGamesGrid = (containerId, results) => {
   
   grid.innerHTML = '';
   grid.appendChild(fragment);
+  if (window.lucide) lucide.createIcons();
 };
 
 // ==========================================
@@ -359,14 +364,14 @@ const performSearch = async (query) => {
   if (!grid) return;
   if (heading) heading.classList.remove('d-none');
   
-  grid.innerHTML = '<div class="text-cyan py-5 w-100 text-center fs-5"><i class="bi bi-arrow-repeat spin me-2"></i>Querying RAWG network...</div>';
+  grid.innerHTML = '<div class="text-cyan py-5 w-100 text-center fs-5">Querying RAWG network...</div>';
 
   try {
     const res = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(query)}&page_size=20&key=${RAWG_API_KEY}`);
     const data = await res.json();
     renderApiGamesGrid('search-results-grid', data.results || []);
   } catch (e) {
-    grid.innerHTML = '<p class="text-danger py-4 w-100 text-center"><i class="bi bi-wifi-off me-2"></i>Search failed. Please check network connection.</p>';
+    grid.innerHTML = '<p class="text-danger py-4 w-100 text-center">Search failed. Please check network connection.</p>';
   }
 };
 
@@ -460,7 +465,7 @@ const initPageLogic = () => {
       
       document.getElementById('contact-success')?.classList.remove('d-none');
       btnSubmitContact.disabled = true;
-      btnSubmitContact.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Transmitted';
+      btnSubmitContact.innerHTML = 'Transmitted';
     });
   }
 };
@@ -479,7 +484,7 @@ const initAuth = () => {
   const loginBtn = document.getElementById('nav-login-btn');
   
   if (session && loginBtn) {
-    loginBtn.innerHTML = '<i class="bi bi-box-arrow-right me-1"></i><span>Logout</span>';
+    loginBtn.innerHTML = '<span>Logout</span>';
     loginBtn.className = 'nav-link text-danger';
     loginBtn.href = '#';
     loginBtn.addEventListener('click', window.logoutUser);
