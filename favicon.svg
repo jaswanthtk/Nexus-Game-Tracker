@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#0d1117"/>
+  <!-- Controller body -->
+  <rect x="10" y="22" width="44" height="24" rx="9" fill="url(#fg)" filter="url(#glow)"/>
+  <!-- D-Pad vertical -->
+  <rect x="19" y="28" width="4" height="12" rx="2" fill="#fff" opacity="0.9"/>
+  <!-- D-Pad horizontal -->
+  <rect x="15" y="32" width="12" height="4" rx="2" fill="#fff" opacity="0.9"/>
+  <!-- Buttons -->
+  <circle cx="42" cy="30" r="2.8" fill="#f0abfc"/>
+  <circle cx="48" cy="34" r="2.8" fill="#7dd3fc"/>
+  <circle cx="42" cy="38" r="2.8" fill="#86efac"/>
+  <circle cx="36" cy="34" r="2.8" fill="#fda4af"/>
+  <!-- Grips -->
+  <ellipse cx="17" cy="46" rx="7" ry="4.5" fill="url(#fg)" filter="url(#glow)"/>
+  <ellipse cx="47" cy="46" rx="7" ry="4.5" fill="url(#fg)" filter="url(#glow)"/>
+</svg>

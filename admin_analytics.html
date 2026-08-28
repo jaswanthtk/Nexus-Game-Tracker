@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Nexus — Elite Terminal for Game Tracking" />
+  <meta name="description" content="Nexus — Your ultimate gaming backlog and telemetry tracker. Organize, discover, and conquer your games." />
+  <meta name="theme-color" content="#09090b" />
   <title>Nexus — Analytics</title>
+  
+  <!-- SEO & Performance Optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="shortcut icon" href="favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" crossorigin="anonymous" />
@@ -12,15 +19,14 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="atmospheric-bg atmospheric-bg-layer1"></div>
-  <nav class="navbar navbar-expand-lg navbar-dark nexus-navbar">
+  <nav class="navbar navbar-expand-lg nexus-navbar animate-fade-up">
     <div class="container-xl">
-      <a class="navbar-brand" href="admin.html">Nexus <span style="font-size:0.6em;color:var(--red);font-weight:600;vertical-align:middle;">ADMIN</span></a>
+      <a class="navbar-brand" href="admin.html" aria-label="Nexus Admin"><i class="bi bi-hexagon-fill text-purple"></i> Nexus <span class="badge bg-purple ms-2" style="font-size:0.6rem;">ADMIN</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav" aria-controls="adminNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <i class="bi bi-list text-white"></i>
       </button>
       <div class="collapse navbar-collapse" id="adminNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-1">
           <li class="nav-item"><a class="nav-link" href="admin.html">Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" href="admin_games.html">Manage Games</a></li>
           <li class="nav-item"><a class="nav-link" href="admin_users.html">User Moderation</a></li>
@@ -29,11 +35,11 @@
           <li class="nav-item"><a class="nav-link" href="admin_logs.html">Audit Logs</a></li>
           <li class="nav-item"><a class="nav-link" href="admin_settings.html">Site Settings</a></li>
         </ul>
-        <ul class="navbar-nav align-items-center">
-          <li class="nav-item"><a class="nav-link text-danger me-2" id="nav-logout-btn" href="#" onclick="logoutUser(event)"><i class="bi bi-box-arrow-right me-1"></i>Logout</a></li>
-          <li class="nav-item"><a class="nav-link text-cyan" href="catalog.html"><i class="bi bi-box-arrow-up-right me-1"></i>View Site</a></li>
+        <ul class="navbar-nav align-items-center gap-3">
+          <li class="nav-item"><a class="nav-link text-danger" id="nav-logout-btn" href="#" onclick="logoutUser(event)" aria-label="Logout"><i class="bi bi-box-arrow-right me-1"></i>Logout</a></li>
+          <li class="nav-item"><a class="nav-link text-cyan" href="catalog.html" aria-label="View Main Site"><i class="bi bi-box-arrow-up-right me-1"></i>View Site</a></li>
           <li class="nav-item">
-            <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Theme">
+            <button class="theme-switcher" id="theme-toggle" aria-label="Toggle Light/Dark Theme">
               <i class="bi bi-moon-stars-fill"></i>
             </button>
           </li>
@@ -44,47 +50,47 @@
 
   <main class="py-5" id="main" role="main">
     <div class="container-xl">
-      <h2 class="rajdhani-font text-red mb-4">Telemetry & Analytics</h2>
-      <div class="row g-4 mb-4">
+      <h1 class="detail-title text-purple mb-4 animate-fade-up">Telemetry & Analytics</h1>
+      <section class="row g-4 mb-5 animate-fade-up delay-100" aria-label="Gameplay Status Metrics">
         <div class="col-md-4">
-          <div class="kpi-card kpi-played">
+          <div class="kpi-card" style="border-top: 3px solid var(--lane-played);">
             <div class="bento-label">Played</div>
-            <div class="kpi-value text-neon-green mt-2" id="analytics-played">--</div>
+            <div class="kpi-value text-neon-green" id="analytics-played">--</div>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="kpi-card kpi-backlog">
+          <div class="kpi-card" style="border-top: 3px solid var(--lane-backlog);">
             <div class="bento-label">Backlog</div>
-            <div class="kpi-value text-amber mt-2" id="analytics-backlog">--</div>
+            <div class="kpi-value text-amber" id="analytics-backlog">--</div>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="kpi-card kpi-upcoming">
+          <div class="kpi-card" style="border-top: 3px solid var(--lane-upcoming);">
             <div class="bento-label">Upcoming</div>
-            <div class="kpi-value text-purple mt-2" id="analytics-upcoming">--</div>
+            <div class="kpi-value text-purple" id="analytics-upcoming">--</div>
           </div>
         </div>
-      </div>
-      <div class="row g-4">
+      </section>
+      <section class="row g-4 animate-fade-up delay-200" aria-label="Detailed Analytics">
         <div class="col-md-6">
-          <div class="bento-card">
-            <h4 class="rajdhani-font text-cyan mb-4">Genre Distribution</h4>
+          <div class="bento-card h-100">
+            <h2 class="detail-title fs-3 text-cyan mb-4">Genre Distribution</h2>
             <div id="analytics-genres"></div>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="bento-card">
-            <h4 class="rajdhani-font text-cyan mb-4">Platform Breakdown</h4>
+          <div class="bento-card h-100">
+            <h2 class="detail-title fs-3 text-cyan mb-4">Platform Breakdown</h2>
             <div id="analytics-platforms"></div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </main>
 
-  <footer class="site-footer-bottom py-4 text-center text-muted" style="border-top: 1px solid var(--glass-border);">
+  <footer class="py-4 text-center text-muted animate-fade-up delay-300" style="border-top: 1px solid var(--border-subtle); margin-top: 5rem;">
     <div class="container-xl">
-      <p class="mb-0 font-rajdhani"><span>NEXUS</span> &mdash; B.Tech &bull; 01CE0306</p>
+      <p class="mb-0" style="font-family: 'Space Grotesk', sans-serif;"><strong>NEXUS</strong> &mdash; B.Tech Final Project &bull; Vanilla Architecture</p>
     </div>
   </footer>
 
