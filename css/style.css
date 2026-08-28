@@ -168,6 +168,22 @@ h1, h2, h3, h4, h5, h6, .detail-title, .rajdhani-font {
   border-color: var(--border-strong);
 }
 
+/* Fix Tailwind conflict with Bootstrap collapse */
+.collapse:not(.show) {
+  display: none !important;
+  visibility: hidden !important;
+}
+.collapse.show {
+  display: block !important;
+  visibility: visible !important;
+}
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    visibility: visible !important;
+  }
+}
+
 /* ============================================================
    PREMIUM BUTTONS
    ============================================================ */
