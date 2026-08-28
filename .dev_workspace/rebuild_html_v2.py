@@ -19,7 +19,7 @@ HEAD_BLOCK = '''<!DOCTYPE html>
   <link rel="shortcut icon" href="favicon.svg" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
 </head>
 '''
 
@@ -121,7 +121,7 @@ FOOTER = '''
 '''
 
 def write_page(filename, title, navbar_html, main_content, script):
-    html = HEAD_BLOCK.format(title=title) + navbar_html + main_content + FOOTER + f'  <script src="js/{script}"></script>\n</body>\n</html>\n'
+    html = HEAD_BLOCK.format(title=title) + navbar_html + main_content + FOOTER + f'  <script src="js/{script}?v=2"></script>\n</body>\n</html>\n'
     # Write directly to the parent folder since we are executing from .dev_workspace
     filepath = os.path.join(os.path.dirname(__file__), '..', filename)
     with open(filepath, 'w', encoding='utf-8') as f:
