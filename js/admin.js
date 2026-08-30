@@ -170,17 +170,18 @@ const initAdminUI = () => {
     if (tbody) {
       tbody.innerHTML = games.map(g => `
         <tr class="animate-fade-up">
-          <td><img src="${escapeHtml(g.cover || 'https://placehold.co/40x50/111/333')}" alt="Cover" style="width:40px;height:50px;object-fit:cover;border-radius:4px;"></td>
+          <td><img src="${escapeHtml(g.cover || 'https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg')}" alt="Cover" style="width:40px;height:50px;object-fit:cover;border-radius:4px;" onerror="this.src='https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg'"></td>
           <td class="fw-bold">${escapeHtml(g.title)}</td>
           <td><span class="badge" style="background:var(--border-subtle); color:var(--text-primary);">${escapeHtml(g.platform)}</span></td>
           <td>${escapeHtml(g.genre || 'N/A')}</td>
-          <td><span class="text-${g.status === 'played' ? 'neon-green' : g.status === 'backlog' ? 'amber' : 'purple'}">${escapeHtml(g.status).toUpperCase()}</span></td>
+          <td><span class="text-${g.status === 'played' ? 'neon-green' : g.status === 'backlog' ? 'amber' : 'purple'} font-semibold">${escapeHtml(g.status).toUpperCase()}</span></td>
           <td>
-            <button class="btn btn-sm btn-save me-1" onclick="openEditModal('${g.id}')" aria-label="Edit Game"><i class="bi bi-pencil"></i></button>
-            <button class="btn btn-sm btn-outline-danger" onclick="openDeleteConfirm('${g.id}')" aria-label="Delete Game"><i class="bi bi-trash"></i></button>
+            <button class="btn btn-sm btn-save me-1" onclick="openEditModal('${g.id}')" aria-label="Edit Game"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
+            <button class="btn btn-sm btn-outline-danger" onclick="openDeleteConfirm('${g.id}')" aria-label="Delete Game"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
           </td>
         </tr>
       `).join('');
+      if (window.lucide) lucide.createIcons();
     }
   }
 
@@ -193,14 +194,15 @@ const initAdminUI = () => {
       usersTbody.innerHTML = users.map((u, i) => `
         <tr class="animate-fade-up delay-100">
           <td>${i + 1}</td>
-          <td class="text-cyan">${escapeHtml(u.username)}</td>
-          <td><span class="badge ${u.role === 'admin' ? 'bg-purple' : 'bg-secondary'}">${u.role === 'admin' ? 'Admin' : 'User'}</span></td>
-          <td><span class="text-neon-green"><i class="bi bi-circle-fill me-1" style="font-size:0.5rem;"></i>Active</span></td>
+          <td class="text-cyan font-bold">${escapeHtml(u.username)}</td>
+          <td><span class="badge ${u.role === 'admin' ? 'bg-purple' : 'bg-secondary'}">${u.role === 'admin' ? 'Admin' : 'Operative'}</span></td>
+          <td><span class="text-neon-green flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span> Active</span></td>
           <td>
-            ${u.role !== 'admin' ? `<button class="btn btn-sm btn-outline-danger" onclick="deleteUser(${i})"><i class="bi bi-ban"></i> Ban</button>` : '<span class="text-muted">Protected</span>'}
+            ${u.role !== 'admin' ? `<button class="btn btn-sm btn-outline-danger" onclick="deleteUser(${i})"><i data-lucide="ban" class="w-4 h-4 inline-block me-1"></i>Ban</button>` : '<span class="text-muted">Protected</span>'}
           </td>
         </tr>
       `).join('');
+      if (window.lucide) lucide.createIcons();
     };
     renderUsers();
     
@@ -402,6 +404,26 @@ window.logoutUser = (e) => {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
+
+  // Seed default operatives if not present
+  if (!localStorage.getItem('nexus_users')) {
+    localStorage.setItem('nexus_users', JSON.stringify([
+      { username: 'NexBoss', role: 'admin' },
+      { username: 'ItzJazzu', role: 'client' },
+      { username: 'CyberSpectre', role: 'client' },
+      { username: 'NeonValkyrie', role: 'client' }
+    ]));
+  }
+
+  // Seed default feedback transmissions if not present
+  if (!localStorage.getItem('nexus_feedback')) {
+    localStorage.setItem('nexus_feedback', JSON.stringify([
+      { name: 'ItzJazzu', email: 'jazzu@nexus.local', message: 'Uplink synchronization is optimal. Catppuccin theme looks stunning.', date: '2026-08-28' },
+      { name: 'CyberSpectre', email: 'spectre@nexus.local', message: 'Requesting expansion of telemetry for Elden Ring DLC release.', date: '2026-08-27' },
+      { name: 'NeonValkyrie', email: 'valkyrie@nexus.local', message: 'Personal Vault drag-and-drop mechanics working flawlessly.', date: '2026-08-26' }
+    ]));
+  }
+
   games = loadFromStorage();
 
   if (games.length === 0) {

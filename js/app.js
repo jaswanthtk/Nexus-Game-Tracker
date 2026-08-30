@@ -138,8 +138,8 @@ const createKanbanCard = (game, index) => {
   attachTiltEffect(card);
 
   const coverHtml = game.cover 
-    ? `<img src="${escapeHtml(game.cover)}" class="w-full h-32 object-cover object-center border-b border-zinc-800" alt="${escapeHtml(game.title)}" onerror="this.src='https://placehold.co/60x80/111/555?text=NA'">`
-    : `<div class="w-full h-32 flex items-center justify-center bg-zinc-950 text-zinc-600 border-b border-zinc-800 text-xs font-mono">NA</div>`;
+    ? `<img src="${escapeHtml(game.cover)}" class="w-full h-32 object-cover object-center border-b border-zinc-800" alt="${escapeHtml(game.title)}" onerror="this.src='https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg'">`
+    : `<div class="w-full h-32 flex items-center justify-center bg-zinc-900 text-zinc-500 border-b border-zinc-800 text-xs font-mono"><i data-lucide="gamepad" class="w-6 h-6 mr-1"></i> ${escapeHtml(game.title.slice(0, 8))}</div>`;
 
   card.innerHTML = `
     ${coverHtml}
@@ -268,7 +268,7 @@ const renderApiGamesGrid = (containerId, results) => {
     
     attachTiltEffect(card);
 
-    const coverUrl = game.background_image || 'https://placehold.co/400x600/111/333?text=No+Cover';
+    const coverUrl = game.background_image || 'https://media.rawg.io/media/games/618/618c2031a07046f861f637f8c465e63e.jpg';
     const ratingHtml = game.rating ? game.rating + '/5' : 'NR';
     const genreText = game.genres && game.genres.length > 0 ? game.genres[0].name : 'Action';
     const platText = game.platforms && game.platforms.length > 0 ? game.platforms[0].platform.name : 'PC';
@@ -279,7 +279,7 @@ const renderApiGamesGrid = (containerId, results) => {
 
     card.innerHTML = `
       <div class="relative w-full pt-[130%] overflow-hidden">
-        <img src="${escapeHtml(coverUrl)}" class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${escapeHtml(game.name)}" loading="lazy" onerror="this.src='https://placehold.co/400x600/111/333?text=No+Cover'">
+        <img src="${escapeHtml(coverUrl)}" class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${escapeHtml(game.name)}" loading="lazy" onerror="this.src='https://media.rawg.io/media/games/618/618c2031a07046f861f637f8c465e63e.jpg'">
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
       </div>
       <div class="p-5 flex flex-col flex-grow bg-zinc-950 relative -mt-4 rounded-t-2xl z-10">
@@ -551,15 +551,88 @@ const initAuth = () => {
 };
 
 // ==========================================
+// XML / Fallback Seed Logic for Client
+// ==========================================
+const getFallbackSeedGames = () => [
+  { id: 'xml_seed_001', title: 'Elden Ring', platform: 'PC', genre: 'RPG', status: 'played', rating: 5, year: '2022', hours: '120', cover: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg', notes: 'Absolute masterpiece. 120+ hours and still going strong.', addedAt: new Date().toISOString() },
+  { id: 'xml_seed_002', title: 'Hollow Knight', platform: 'PC', genre: 'Action', status: 'played', rating: 5, year: '2017', hours: '52', cover: 'https://cdn.cloudflare.steamstatic.com/steam/apps/367520/header.jpg', notes: 'Tight controls and incredible world-building.', addedAt: new Date().toISOString() },
+  { id: 'xml_seed_003', title: 'Cyberpunk 2077', platform: 'PlayStation 5', genre: 'RPG', status: 'backlog', rating: 4, year: '2020', hours: null, cover: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg', notes: 'Picked it up after the 2.0 patch.', addedAt: new Date().toISOString() },
+  { id: 'xml_seed_004', title: 'Hades II', platform: 'PC', genre: 'Action', status: 'backlog', rating: 5, year: '2024', hours: null, cover: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/header.jpg', notes: 'In early access. Waiting for full release.', addedAt: new Date().toISOString() },
+  { id: 'xml_seed_005', title: 'GTA VI', platform: 'PlayStation 5', genre: 'Action', status: 'upcoming', rating: null, year: '2025', hours: null, cover: 'https://upload.wikimedia.org/wikipedia/en/4/46/Grand_Theft_Auto_VI.png', notes: 'Most anticipated game of the decade.', addedAt: new Date().toISOString() },
+  { id: 'xml_seed_006', title: 'Fable (2025)', platform: 'Xbox Series X', genre: 'RPG', status: 'upcoming', rating: null, year: '2025', hours: null, cover: 'https://upload.wikimedia.org/wikipedia/en/b/b8/Fable_key_art.png', notes: 'A full reboot of the Lionhead franchise.', addedAt: new Date().toISOString() }
+];
+
+const fetchGamesFromXML = (onSuccess, onError) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'games.xml', true);
+  if (xhr.overrideMimeType) xhr.overrideMimeType('text/xml');
+  
+  xhr.onload = () => {
+    if (xhr.status !== 200 && xhr.status !== 0) return onError();
+    let xmlDoc = xhr.responseXML;
+    if (!xmlDoc?.documentElement || xmlDoc.getElementsByTagName('parsererror').length) {
+      try { xmlDoc = new DOMParser().parseFromString(xhr.responseText, 'text/xml'); } 
+      catch (e) { return onError(); }
+    }
+    if (!xmlDoc) return onError();
+
+    const nodes = xmlDoc.getElementsByTagName('game');
+    const parsed = Array.from(nodes).map(node => {
+      const getText = tag => (node.getElementsByTagName(tag)[0]?.textContent || '').trim();
+      const title = getText('title');
+      if (!title) return null;
+      return {
+        id: getText('id') || generateId(),
+        title,
+        platform: getText('platform'),
+        genre: getText('genre'),
+        status: getText('status'),
+        rating: parseInt(getText('rating')) || null,
+        year: getText('year') || null,
+        hours: getText('hours') || null,
+        cover: getText('cover') || null,
+        notes: getText('notes') || null,
+        addedAt: new Date().toISOString(),
+        source: 'xml'
+      };
+    }).filter(Boolean);
+
+    if (parsed.length) onSuccess(parsed);
+    else onError();
+  };
+  xhr.onerror = onError;
+  xhr.send();
+};
+
+// ==========================================
 // Bootstrap
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   games = loadFromStorage();
   
-  initPageLogic();
-  initAuth();
+  if (games.length === 0) {
+    fetchGamesFromXML(
+      (parsed) => {
+        games = parsed;
+        saveToStorage();
+        initPageLogic();
+        renderKanban();
+        setupDragDrop();
+      },
+      () => {
+        games = getFallbackSeedGames();
+        saveToStorage();
+        initPageLogic();
+        renderKanban();
+        setupDragDrop();
+      }
+    );
+  } else {
+    initPageLogic();
+    renderKanban();
+    setupDragDrop();
+  }
   
-  renderKanban();
-  setupDragDrop();
+  initAuth();
 });
