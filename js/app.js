@@ -118,7 +118,6 @@ const attachTiltEffect = (card) => {
       const rotateY = ((x - centerX) / centerX) * 10;
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      card.style.boxShadow = `0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.15)`;
       
       lastX = mouseX;
       lastY = mouseY;
@@ -146,7 +145,6 @@ const attachTiltEffect = (card) => {
     card.classList.remove('tilt-animating');
     card.classList.add('tilt-reset');
     card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-    card.style.boxShadow = '';
   });
 };
 
