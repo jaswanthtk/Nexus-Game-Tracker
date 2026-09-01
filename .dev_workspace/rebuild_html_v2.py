@@ -21,30 +21,10 @@ HEAD_BLOCK = '''<!DOCTYPE html>
   <!-- Keep bootstrap for modal functionality -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" crossorigin="anonymous" />
   
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-          },
-          colors: {
-            brand: { 400: '#74c7ec', 500: '#89b4fa', 900: '#181825' },
-            accent: { 400: '#cba6f7', 500: '#b4befe' }
-          }
-        }
-      }
-    }
-  </script>
-  
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <link rel="stylesheet" href="css/style.css?v=4" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
 </head>
 '''
 
