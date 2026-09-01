@@ -183,8 +183,6 @@ h1, h2, h3, h4, h5, h6, .detail-title, .rajdhani-font {
   top: 0;
   z-index: 1000;
   background: var(--bg-nav);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
   padding: 0.75rem 0;
 }
@@ -711,4 +709,18 @@ html[data-theme="dark"] ::-webkit-scrollbar-track {
 }
 html[data-theme="dark"] ::-webkit-scrollbar-thumb {
   background: #45475a;
+}
+
+/* ============================================================
+   PERFORMANCE & HARDWARE ACCELERATION UTILITIES
+   ============================================================ */
+.tilt-animating {
+  will-change: transform, box-shadow;
+  /* Disable CSS transitions during JS tick for 1:1 tracking */
+  transition: none !important;
+}
+
+.tilt-reset {
+  /* Smooth snap back to original position */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease !important;
 }

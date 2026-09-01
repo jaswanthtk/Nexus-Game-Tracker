@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="css/style.css?v=4" />
 </head>
 <body class="bg-zinc-950 text-zinc-300 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500/30">
-  <nav class="navbar navbar-expand-lg sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 shadow-lg py-3">
+  <nav class="navbar navbar-expand-lg sticky top-0 z-50 bg-zinc-950/80  border-b border-zinc-800 shadow-lg py-3">
     <div class="container-xl">
       <a class="navbar-brand text-2xl font-display font-bold text-white flex items-center gap-2 hover:text-brand-400 transition-colors" href="catalog.html" aria-label="Nexus Home">
         <i data-lucide="hexagon" class="text-brand-500 w-8 h-8 fill-brand-500/20"></i> Nexus
@@ -81,7 +81,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="kanban-board">
         <!-- PLAYED Lane -->
-        <section class="kanban-lane bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Played games">
+        <section class="kanban-lane bg-zinc-900/40  border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Played games">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800/80">
             <div class="flex items-center gap-3">
               <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500"></i>
@@ -98,7 +98,7 @@
         </section>
 
         <!-- BACKLOG Lane -->
-        <section class="kanban-lane bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Backlog games">
+        <section class="kanban-lane bg-zinc-900/40  border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Backlog games">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800/80">
             <div class="flex items-center gap-3">
               <i data-lucide="clock" class="w-6 h-6 text-amber-500"></i>
@@ -115,7 +115,7 @@
         </section>
 
         <!-- UPCOMING Lane -->
-        <section class="kanban-lane bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Upcoming games">
+        <section class="kanban-lane bg-zinc-900/40  border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Upcoming games">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800/80">
             <div class="flex items-center gap-3">
               <i data-lucide="calendar" class="w-6 h-6 text-brand-500"></i>
@@ -142,7 +142,7 @@
 
   <!-- Toast -->
   <div class="toast-container position-fixed bottom-0 end-0 p-4 z-[1100]">
-    <div id="app-toast" class="toast align-items-center text-white bg-zinc-900/90 backdrop-blur border border-zinc-800 shadow-2xl rounded-xl" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="app-toast" class="toast align-items-center text-white bg-zinc-900/90  border border-zinc-800 shadow-2xl rounded-xl" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex p-1">
         <div class="toast-body flex items-center text-sm font-medium">
           <i data-lucide="check-circle" class="w-5 h-5 mr-3 text-brand-400" id="toast-icon"></i>

@@ -13,7 +13,7 @@
     margin: 0;
     padding: 40px 20px;
     background-color: #f0f0f0;
-    color: #333;
+    color: #cdd6f4;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,8 +32,8 @@
   }
 
   .wireframe {
-    border: 2px solid #555;
-    background: #fff;
+    border: 2px solid #cba6f7;
+    background: #181825; border-color: #313244;
     width: 100%;
     max-width: 1000px;
     display: grid;
@@ -42,7 +42,7 @@
   }
 
   .box {
-    border: 1px dashed #999;
+    border: 1px dashed #45475a;
     background: #e9e9e9;
     display: flex;
     align-items: center;
@@ -83,7 +83,7 @@
       "footer footer";
   }
 
-  header { grid-area: header; margin: 0; border: none; border-bottom: 2px solid #555; background: #ddd; }
+  header { grid-area: header; margin: 0; border: none; border-bottom: 2px solid #313244; background: #ddd; }
   aside { grid-area: sidebar; margin: 0; border: none; border-right: 2px solid #555; align-items: flex-start; padding-top: 20px; flex-direction: column; justify-content: flex-start; gap: 20px; }
   main { grid-area: content; display: flex; flex-direction: column; padding: 10px; gap: 10px; }
   footer { grid-area: footer; margin: 0; border: none; border-top: 2px solid #555; background: #ddd; }
@@ -152,7 +152,7 @@
           </div>
         </div>
         <div class="box" style="flex: 1; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 5px; padding: 20px;">
-          <div class="table-row" style="border-bottom: 2px solid #555;">
+          <div class="table-row" style="border-bottom: 2px solid #313244;">
             <span>Cover</span><span>Title</span><span>Status</span><span>Action</span>
           </div>
           <div class="table-row box" style="margin:0;"><span>[IMG]</span><span>Cyber-Odyssey</span><span>Playing</span><span>[Edit]</span></div>
@@ -175,16 +175,16 @@
       <main style="justify-content: center; align-items: center; padding: 40px;">
         <div class="grid-2col" style="max-width: 800px; height: 300px;">
           <div class="box" style="flex-direction: column; gap: 15px;">
-            <span style="font-size: 20px; border-bottom: 1px solid #999; padding-bottom: 10px; width: 80%;">Login</span>
+            <span style="font-size: 20px; border-bottom: 1px solid #45475a; padding-bottom: 10px; width: 80%;">Login</span>
             <span class="box" style="margin:0; height: 30px; width: 80%; font-weight:normal;">Username</span>
             <span class="box" style="margin:0; height: 30px; width: 80%; font-weight:normal;">Password</span>
-            <span class="box" style="margin:0; height: 40px; width: 80%; background:#bbb; border: 2px solid #333; color: #000;">[ ENTER ]</span>
+            <span class="box" style="margin:0; height: 40px; width: 80%; background: #74c7ec; color: #1e1e2e; border: none; border: 2px solid #333; color: #000;">[ ENTER ]</span>
           </div>
           <div class="box" style="flex-direction: column; gap: 15px;">
-            <span style="font-size: 20px; border-bottom: 1px solid #999; padding-bottom: 10px; width: 80%;">Register</span>
+            <span style="font-size: 20px; border-bottom: 1px solid #45475a; padding-bottom: 10px; width: 80%;">Register</span>
             <span class="box" style="margin:0; height: 30px; width: 80%; font-weight:normal;">Username</span>
             <span class="box" style="margin:0; height: 30px; width: 80%; font-weight:normal;">Password</span>
-            <span class="box" style="margin:0; height: 40px; width: 80%; background:#bbb; border: 2px solid #333; color: #000;">[ SUBMIT ]</span>
+            <span class="box" style="margin:0; height: 40px; width: 80%; background: #74c7ec; color: #1e1e2e; border: none; border: 2px solid #333; color: #000;">[ SUBMIT ]</span>
           </div>
         </div>
       </main>
@@ -201,11 +201,11 @@
         <span>[ Admin User ] | [ Logout ]</span>
       </header>
       <aside class="box">
-        <div style="width: 100%; padding: 10px; background: #ccc; cursor: pointer;">Dashboard</div>
-        <div style="width: 100%; padding: 10px; border: 1px dashed #999;">Manage Games</div>
-        <div style="width: 100%; padding: 10px; border: 1px dashed #999;">Manage Users</div>
-        <div style="width: 100%; padding: 10px; border: 1px dashed #999;">Inbox</div>
-        <div style="width: 100%; padding: 10px; border: 1px dashed #999;">Audit Logs</div>
+        <div style="width: 100%; padding: 10px; background: #313244; cursor: pointer;">Dashboard</div>
+        <div style="width: 100%; padding: 10px; border: 1px dashed #45475a;">Manage Games</div>
+        <div style="width: 100%; padding: 10px; border: 1px dashed #45475a;">Manage Users</div>
+        <div style="width: 100%; padding: 10px; border: 1px dashed #45475a;">Inbox</div>
+        <div style="width: 100%; padding: 10px; border: 1px dashed #45475a;">Audit Logs</div>
       </aside>
       <main>
         <div class="box" style="height: 50px; justify-content: flex-start;">Dashboard Overview</div>
@@ -222,9 +222,9 @@
           </div>
           <div class="box" style="flex-direction: column; justify-content: flex-start; padding-top:20px; gap: 10px;">
             <span>Recent Activity Feed</span>
-            <div style="border: 1px dashed #999; padding: 5px; width: 90%; font-size:12px; text-align:left;">User XYZ registered</div>
-            <div style="border: 1px dashed #999; padding: 5px; width: 90%; font-size:12px; text-align:left;">Game 'Halo' added</div>
-            <div style="border: 1px dashed #999; padding: 5px; width: 90%; font-size:12px; text-align:left;">New support ticket</div>
+            <div style="border: 1px dashed #45475a; padding: 5px; width: 90%; font-size:12px; text-align:left;">User XYZ registered</div>
+            <div style="border: 1px dashed #45475a; padding: 5px; width: 90%; font-size:12px; text-align:left;">Game 'Halo' added</div>
+            <div style="border: 1px dashed #45475a; padding: 5px; width: 90%; font-size:12px; text-align:left;">New support ticket</div>
           </div>
         </div>
       </main>
@@ -241,9 +241,9 @@
         <span>[ Admin User ] | [ Logout ]</span>
       </header>
       <aside class="box">
-        <div style="width: 100%; padding: 10px; border: 1px dashed #999;">Dashboard</div>
-        <div style="width: 100%; padding: 10px; background: #ccc; cursor: pointer;">Manage Games</div>
-        <div style="width: 100%; padding: 10px; border: 1px dashed #999;">Manage Users</div>
+        <div style="width: 100%; padding: 10px; border: 1px dashed #45475a;">Dashboard</div>
+        <div style="width: 100%; padding: 10px; background: #313244; cursor: pointer;">Manage Games</div>
+        <div style="width: 100%; padding: 10px; border: 1px dashed #45475a;">Manage Users</div>
       </aside>
       <main>
         <div class="box" style="height: 60px; justify-content: space-between;">
@@ -252,7 +252,7 @@
         </div>
         
         <div class="box" style="flex: 1; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 5px; padding: 20px;">
-          <div style="display: grid; grid-template-columns: 1fr 3fr 1fr 1fr; gap: 10px; border-bottom: 2px solid #555; padding-bottom: 5px; margin-bottom: 10px;">
+          <div style="display: grid; grid-template-columns: 1fr 3fr 1fr 1fr; gap: 10px; border-bottom: 2px solid #313244; padding-bottom: 5px; margin-bottom: 10px;">
             <span>ID</span><span>Title</span><span>Genre</span><span>Actions</span>
           </div>
           <div class="box" style="margin:0; display: grid; grid-template-columns: 1fr 3fr 1fr 1fr; gap: 10px; height: 40px;"><span>#001</span><span>Zelda: BotW</span><span>Adventure</span><span>[Edit] [Del]</span></div>

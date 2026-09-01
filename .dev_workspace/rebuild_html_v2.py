@@ -63,7 +63,7 @@ def client_navbar(active):
         aria = ' aria-current="page"' if href == active else ''
         items += f'          <li class="nav-item"><a class="{cls}"{aria} href="{href}">{label}</a></li>\n'
     return f'''<body class="bg-zinc-950 text-zinc-300 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500/30">
-  <nav class="navbar navbar-expand-lg sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 shadow-lg py-3">
+  <nav class="navbar navbar-expand-lg sticky top-0 z-50 bg-zinc-950/80  border-b border-zinc-800 shadow-lg py-3">
     <div class="container-xl">
       <a class="navbar-brand text-2xl font-display font-bold text-white flex items-center gap-2 hover:text-brand-400 transition-colors" href="catalog.html" aria-label="Nexus Home">
         <i data-lucide="hexagon" class="text-brand-500 w-8 h-8 fill-brand-500/20"></i> Nexus
@@ -103,7 +103,7 @@ def admin_navbar(active):
         aria = ' aria-current="page"' if href == active else ''
         items += f'          <li class="nav-item"><a class="{cls}"{aria} href="{href}">{label}</a></li>\n'
     return f'''<body class="bg-zinc-950 text-zinc-300 min-h-screen flex flex-col font-sans antialiased selection:bg-accent-500/30">
-  <nav class="navbar navbar-expand-lg sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 shadow-lg py-3">
+  <nav class="navbar navbar-expand-lg sticky top-0 z-50 bg-zinc-950/80  border-b border-zinc-800 shadow-lg py-3">
     <div class="container-xl">
       <a class="navbar-brand text-2xl font-display font-bold text-white flex items-center gap-2 hover:text-accent-400 transition-colors" href="admin.html" aria-label="Nexus Admin">
         <i data-lucide="shield" class="text-accent-500 w-8 h-8 fill-accent-500/20"></i> Nexus 
@@ -138,7 +138,7 @@ FOOTER = '''
 
   <!-- Toast -->
   <div class="toast-container position-fixed bottom-0 end-0 p-4 z-[1100]">
-    <div id="app-toast" class="toast align-items-center text-white bg-zinc-900/90 backdrop-blur border border-zinc-800 shadow-2xl rounded-xl" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="app-toast" class="toast align-items-center text-white bg-zinc-900/90  border border-zinc-800 shadow-2xl rounded-xl" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex p-1">
         <div class="toast-body flex items-center text-sm font-medium">
           <i data-lucide="check-circle" class="w-5 h-5 mr-3 text-brand-400" id="toast-icon"></i>
@@ -305,7 +305,7 @@ LOGBOOK_MAIN = '''
 LOGBOOK_MAIN += '''
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="kanban-board">
         <!-- PLAYED Lane -->
-        <section class="kanban-lane bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Played games">
+        <section class="kanban-lane bg-zinc-900/40  border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Played games">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800/80">
             <div class="flex items-center gap-3">
               <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500"></i>
@@ -322,7 +322,7 @@ LOGBOOK_MAIN += '''
         </section>
 
         <!-- BACKLOG Lane -->
-        <section class="kanban-lane bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Backlog games">
+        <section class="kanban-lane bg-zinc-900/40  border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Backlog games">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800/80">
             <div class="flex items-center gap-3">
               <i data-lucide="clock" class="w-6 h-6 text-amber-500"></i>
@@ -339,7 +339,7 @@ LOGBOOK_MAIN += '''
         </section>
 
         <!-- UPCOMING Lane -->
-        <section class="kanban-lane bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Upcoming games">
+        <section class="kanban-lane bg-zinc-900/40  border border-zinc-800 rounded-3xl p-6 min-h-[60vh] flex flex-col" aria-label="Upcoming games">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800/80">
             <div class="flex items-center gap-3">
               <i data-lucide="calendar" class="w-6 h-6 text-brand-500"></i>
@@ -380,7 +380,7 @@ INDEX_MAIN = '''
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
         
         <div class="relative p-8 md:p-12 flex flex-col justify-end min-h-[400px]">
-          <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-semibold tracking-wide uppercase mb-4 w-fit border border-brand-500/30 backdrop-blur">
+          <span class="inline-flex items-center px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-semibold tracking-wide uppercase mb-4 w-fit border border-brand-500/30 ">
             <i data-lucide="star" class="w-3 h-3 mr-2 fill-brand-400"></i> Daily Showcase
           </span>
           <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-3 tracking-tight" id="featured-title">Loading Intel...</h2>
@@ -447,7 +447,7 @@ PROFILE_MAIN = '''
     <div class="container-xl max-w-5xl">
       <h1 class="text-4xl font-display font-bold text-brand-400 mb-8">Operative Profile</h1>
       
-      <section class="bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-8 shadow-xl" aria-label="Profile Details">
+      <section class="bg-zinc-900/40  border border-zinc-800 rounded-3xl p-8 shadow-xl" aria-label="Profile Details">
         <div class="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div class="w-32 h-32 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-5xl font-display font-bold text-white shadow-[0_0_30px_rgba(6,182,212,0.3)] ring-4 ring-zinc-950" id="profile-avatar-char" aria-hidden="true">J</div>
           <div class="text-center md:text-left">
@@ -491,7 +491,7 @@ CONTACT_MAIN = '''
         <h1 class="text-4xl font-display font-bold text-brand-400 mb-2 text-center">Establish Uplink</h1>
         <p class="text-zinc-400 text-center mb-10">Transmit feedback or support requests securely to Nexus Command.</p>
         
-        <section class="bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-8 shadow-xl">
+        <section class="bg-zinc-900/40  border border-zinc-800 rounded-3xl p-8 shadow-xl">
           <form id="contact-form" novalidate class="space-y-6">
             <div>
               <label for="contact-name" class="block text-sm font-medium text-zinc-300 mb-2">Operative ID <span class="text-brand-500">*</span></label>
@@ -604,7 +604,7 @@ LOGIN_PAGE = '''
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         <!-- Login -->
-        <section class="bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-3xl p-8 shadow-xl" aria-label="Login Form">
+        <section class="bg-zinc-900/40  border border-zinc-800 rounded-3xl p-8 shadow-xl" aria-label="Login Form">
           <div class="flex items-center gap-3 mb-6">
             <div class="w-10 h-10 rounded-lg bg-brand-500/20 flex items-center justify-center border border-brand-500/30">
               <i data-lucide="log-in" class="w-5 h-5 text-brand-400"></i>
@@ -628,7 +628,7 @@ LOGIN_PAGE = '''
         </section>
         
         <!-- Signup -->
-        <section class="bg-zinc-900/20 backdrop-blur border border-zinc-800/50 rounded-3xl p-8 border-dashed" aria-label="Signup Form">
+        <section class="bg-zinc-900/20  border border-zinc-800/50 rounded-3xl p-8 border-dashed" aria-label="Signup Form">
           <div class="flex items-center gap-3 mb-6">
             <div class="w-10 h-10 rounded-lg bg-accent-500/20 flex items-center justify-center border border-accent-500/30">
               <i data-lucide="user-plus" class="w-5 h-5 text-accent-400"></i>
@@ -668,7 +668,7 @@ WELCOME_PAGE = '''
       </div>
       
       <div class="container-xl relative z-10 text-center px-4">
-        <div class="inline-flex items-center justify-center p-3 bg-brand-500/10 rounded-2xl mb-8 border border-brand-500/20 backdrop-blur-xl">
+        <div class="inline-flex items-center justify-center p-3 bg-brand-500/10 rounded-2xl mb-8 border border-brand-500/20 -xl">
           <i data-lucide="hexagon" class="w-12 h-12 text-brand-400 fill-brand-400/20"></i>
         </div>
         

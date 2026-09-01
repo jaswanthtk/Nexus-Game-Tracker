@@ -97,20 +97,54 @@ const loadFromStorage = () => {
 // 3D Vanilla Tilt Effect
 // ==========================================
 const attachTiltEffect = (card) => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left; 
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
+  let isHovering = false;
+  let rafId = null;
+  let mouseX = 0;
+  let mouseY = 0;
+  let rect = null;
+
+  let lastX = null;
+  let lastY = null;
+
+  const updateTransform = () => {
+    if (!isHovering || !rect) return;
     
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    card.style.boxShadow = `0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.15)`;
+    if (mouseX !== lastX || mouseY !== lastY) {
+      const x = mouseX - rect.left; 
+      const y = mouseY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.boxShadow = `0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.15)`;
+      
+      lastX = mouseX;
+      lastY = mouseY;
+    }
+    
+    rafId = requestAnimationFrame(updateTransform);
+  };
+
+  card.addEventListener('mouseenter', () => {
+    isHovering = true;
+    rect = card.getBoundingClientRect();
+    card.classList.remove('tilt-reset');
+    card.classList.add('tilt-animating');
+    rafId = requestAnimationFrame(updateTransform);
+  });
+
+  card.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
 
   card.addEventListener('mouseleave', () => {
+    isHovering = false;
+    cancelAnimationFrame(rafId);
+    card.classList.remove('tilt-animating');
+    card.classList.add('tilt-reset');
     card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     card.style.boxShadow = '';
   });
@@ -306,25 +340,14 @@ const renderApiGamesGrid = (containerId, results) => {
 // RAWG API Fetching (Robust Fallback)
 // ==========================================
 const fetchDailyShowcase = async () => {
-  const cacheKey = 'nexus_daily_showcase';
-  const today = new Date().toISOString().split('T')[0];
+  // Fetch random high-rated games to keep catalog fresh
+  const randomPage = Math.floor(Math.random() * 20) + 1;
   
   try {
-    const cachedData = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-    if (cachedData && cachedData.date === today && cachedData.games && cachedData.games.length > 0) {
-      renderShowcase(cachedData.games);
-      return;
-    }
-  } catch (e) {}
-
-  try {
-    const res = await fetch(`https://api.rawg.io/api/games?metacritic=80,100&page_size=12&key=${RAWG_API_KEY}`);
+    const res = await fetch(`https://api.rawg.io/api/games?metacritic=80,100&page_size=12&page=${randomPage}&ordering=-rating&key=${RAWG_API_KEY}`);
     const data = await res.json();
     
     if (data && data.results && data.results.length > 0) {
-      try {
-        localStorage.setItem(cacheKey, JSON.stringify({ date: today, games: data.results }));
-      } catch (e) {}
       renderShowcase(data.results);
     } else {
       throw new Error('No results from RAWG');
@@ -338,9 +361,16 @@ const fetchDailyShowcase = async () => {
       { id: 4200, name: 'Portal 2', rating: 4.61, released: '2011-04-18', metacritic: 95, background_image: 'https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d85e0f9252.jpg', genres: [{name: 'Shooter'}], platforms: [{platform: {name: 'PC'}}] },
       { id: 5286, name: 'Tomb Raider', rating: 4.05, released: '2013-03-05', metacritic: 86, background_image: 'https://media.rawg.io/media/games/021/021c4e21a1824d2526f925edd63246bb.jpg', genres: [{name: 'Action'}], platforms: [{platform: {name: 'PC'}}] },
       { id: 13536, name: 'Portal', rating: 4.51, released: '2007-10-09', metacritic: 90, background_image: 'https://media.rawg.io/media/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg', genres: [{name: 'Puzzle'}], platforms: [{platform: {name: 'PC'}}] },
-      { id: 12020, name: 'Left 4 Dead 2', rating: 4.09, released: '2009-11-17', metacritic: 89, background_image: 'https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg', genres: [{name: 'Action'}], platforms: [{platform: {name: 'PC'}}] }
+      { id: 12020, name: 'Left 4 Dead 2', rating: 4.09, released: '2009-11-17', metacritic: 89, background_image: 'https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg', genres: [{name: 'Action'}], platforms: [{platform: {name: 'PC'}}] },
+      { id: 58175, name: 'God of War', rating: 4.59, released: '2018-04-20', metacritic: 94, background_image: 'https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg', genres: [{name: 'Action'}], platforms: [{platform: {name: 'PC'}}] },
+      { id: 28, name: 'Red Dead Redemption 2', rating: 4.59, released: '2018-10-26', metacritic: 97, background_image: 'https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg', genres: [{name: 'Action'}], platforms: [{platform: {name: 'PC'}}] },
+      { id: 1030, name: 'Limbo', rating: 4.15, released: '2010-07-21', metacritic: 88, background_image: 'https://media.rawg.io/media/games/91c/91c4f377c1e460028e5c5332f152d2f7.jpg', genres: [{name: 'Puzzle'}], platforms: [{platform: {name: 'PC'}}] },
+      { id: 2454, name: 'DOOM', rating: 4.38, released: '2016-05-12', metacritic: 85, background_image: 'https://media.rawg.io/media/games/c4b/c4b0cab189e73432de3a250d8cf1c84e.jpg', genres: [{name: 'Shooter'}], platforms: [{platform: {name: 'PC'}}] },
+      { id: 278, name: 'Horizon Zero Dawn', rating: 4.31, released: '2017-02-28', metacritic: 89, background_image: 'https://media.rawg.io/media/games/b7d/b7d3f1715fa8381a4e780173a197a615.jpg', genres: [{name: 'Action'}], platforms: [{platform: {name: 'PC'}}] }
     ];
-    renderShowcase(fallbackResults);
+    // Shuffle and pick 12 random games (if available) to simulate a fresh catalog
+    const shuffled = fallbackResults.sort(() => 0.5 - Math.random());
+    renderShowcase(shuffled.slice(0, 12));
   }
 };
 
