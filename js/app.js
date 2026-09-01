@@ -94,66 +94,16 @@ const loadFromStorage = () => {
 };
 
 // ==========================================
-// 3D Vanilla Tilt Effect
+// 3D Vanilla Tilt Effect (Replaced by GPU CSS)
 // ==========================================
-const attachTiltEffect = (card) => {
-  let isHovering = false;
-  let rafId = null;
-  let mouseX = 0;
-  let mouseY = 0;
-  let rect = null;
-
-  let lastX = null;
-  let lastY = null;
-
-  const updateTransform = () => {
-    if (!isHovering || !rect) return;
-    
-    if (mouseX !== lastX || mouseY !== lastY) {
-      const x = mouseX - rect.left; 
-      const y = mouseY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
-      
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      
-      lastX = mouseX;
-      lastY = mouseY;
-    }
-    
-    rafId = requestAnimationFrame(updateTransform);
-  };
-
-  card.addEventListener('mouseenter', () => {
-    isHovering = true;
-    rect = card.getBoundingClientRect();
-    card.classList.remove('tilt-reset');
-    card.classList.add('tilt-animating');
-    rafId = requestAnimationFrame(updateTransform);
-  });
-
-  card.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  card.addEventListener('mouseleave', () => {
-    isHovering = false;
-    cancelAnimationFrame(rafId);
-    card.classList.remove('tilt-animating');
-    card.classList.add('tilt-reset');
-    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-  });
-};
+const attachTiltEffect = () => {};
 
 // ==========================================
 // Kanban Logic (Library)
 // ==========================================
 const createKanbanCard = (game, index) => {
   const card = document.createElement('div');
-  card.className = `bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden shadow-lg cursor-grab active:cursor-grabbing hover:border-brand-500/50 transition-colors animate-fade-up delay-${Math.min((index + 1) * 100, 600)}`;
+  card.className = `kanban-card cursor-grab active:cursor-grabbing animate-fade-up delay-${Math.min((index + 1) * 100, 600)}`;
   card.setAttribute('data-id', game.id);
   card.setAttribute('draggable', 'true');
 
@@ -166,8 +116,6 @@ const createKanbanCard = (game, index) => {
     draggedGameId = null;
     card.style.opacity = '1';
   });
-  
-  attachTiltEffect(card);
 
   const coverHtml = game.cover 
     ? `<img src="${escapeHtml(game.cover)}" class="w-full h-32 object-cover object-center border-b border-zinc-800" alt="${escapeHtml(game.title)}" onerror="this.src='https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg'">`
@@ -296,9 +244,7 @@ const renderApiGamesGrid = (containerId, results) => {
   results.forEach((game, idx) => {
     const delay = Math.min((idx + 1) * 100, 600);
     const card = document.createElement('div');
-    card.className = `bg-zinc-900/40 backdrop-blur border border-zinc-800 rounded-2xl overflow-hidden shadow-xl hover:border-brand-500/30 transition-colors animate-fade-up delay-${delay} flex flex-col h-full group`;
-    
-    attachTiltEffect(card);
+    card.className = `game-card animate-fade-up delay-${delay} group`;
 
     const coverUrl = game.background_image || 'https://media.rawg.io/media/games/618/618c2031a07046f861f637f8c465e63e.jpg';
     const ratingHtml = game.rating ? game.rating + '/5' : 'NR';

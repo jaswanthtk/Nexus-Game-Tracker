@@ -385,8 +385,37 @@ html[data-theme="light"] .hero-overlay {
 }
 
 /* ============================================================
-   KANBAN BOARD
+   GAME CARDS & KANBAN (GPU Hardware Accelerated)
    ============================================================ */
+.game-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, border-color, box-shadow;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s ease,
+              box-shadow 0.22s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-6px) translateZ(0);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45),
+              0 0 20px rgba(116, 199, 236, 0.18);
+}
+
+.game-card img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 .kanban-lane {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
@@ -394,19 +423,25 @@ html[data-theme="light"] .hero-overlay {
   padding: 1.5rem;
   min-height: 60vh;
 }
+
 .kanban-card {
-  background: var(--bg-base);
+  background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  cursor: grab;
-  display: flex;
-  gap: 0.75rem;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, border-color, box-shadow;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
 }
+
 .kanban-card:hover {
-  border-color: var(--border-strong);
+  transform: translateY(-4px) translateZ(0);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.4),
+              0 0 16px rgba(116, 199, 236, 0.15);
 }
 
 /* ============================================================
@@ -1053,13 +1088,20 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb {
 /* ============================================================
    PERFORMANCE & HARDWARE ACCELERATION UTILITIES
    ============================================================ */
-.tilt-animating {
-  will-change: transform;
-  /* Disable CSS transitions during JS tick for 1:1 tracking */
-  transition: none !important;
+.gpu-layer,
+.hero-banner,
+.hero-bg,
+.game-card,
+.kanban-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-.tilt-reset {
-  /* Smooth snap back to original position */
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+/* Optimize image scaling transitions for 144Hz compositor */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.08) translateZ(0);
+}
+
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.04) translateZ(0);
 }

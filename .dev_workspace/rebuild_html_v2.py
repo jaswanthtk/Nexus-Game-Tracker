@@ -24,7 +24,7 @@ HEAD_BLOCK = '''<!DOCTYPE html>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
 </head>
 '''
 
@@ -138,7 +138,7 @@ FOOTER = '''
 '''
 
 def write_page(filename, title, navbar_html, main_content, script):
-    html = HEAD_BLOCK.replace('{title}', title) + navbar_html + main_content + FOOTER + f'  <script src="js/{script}?v=4"></script>\n</body>\n</html>\n'
+    html = HEAD_BLOCK.replace('{title}', title) + navbar_html + main_content + FOOTER + f'  <script src="js/{script}?v=6"></script>\n</body>\n</html>\n'
     filepath = os.path.join(os.path.dirname(__file__), '..', filename)
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(html)
