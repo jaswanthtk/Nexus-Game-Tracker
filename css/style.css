@@ -144,11 +144,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Smooth theme transitions */
-body, .navbar, .kanban-lane, .modal-content,
-.form-control, .form-select, .toast, footer,
-main, section, input, button, a, div, h1, h2, h3, p {
-  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+/* Theme transitions — scoped to containers only, NOT every element */
+.navbar, .kanban-lane, .modal-content, footer {
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 h1, h2, h3, h4, h5, h6, .detail-title, .rajdhani-font {

@@ -41,9 +41,8 @@ HEAD_BLOCK = '''<!DOCTYPE html>
     }
   </script>
   
-  <!-- Motion (Vanilla) & Lucide -->
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
 
   <link rel="stylesheet" href="css/style.css?v=4" />
 </head>
